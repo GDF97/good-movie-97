@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Movie } from "../types/Movie";
 
 import "../scss/pages/Movie.scss";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 const formatCurrency = (number: number) => {
   return number.toLocaleString("en-US", {
@@ -72,10 +73,11 @@ const MoviePoster = () => {
   const { id } = useParams<string>();
   const parserId: number = id ? parseInt(id, 10) : 0;
   const [moviePoster, setMoviePoster] = useState<Movie | null>(null);
+  const { language } = useContext(LanguageContext);
 
   const fetchOneMovie = async () => {
     const { id, title, poster_path, overview, budget, revenue, runtime } =
-      await api.fetchOneMovie(parserId, "en-US");
+      await api.fetchOneMovie(parserId);
 
     const moviePosterObj: Movie = {
       id,
@@ -92,7 +94,8 @@ const MoviePoster = () => {
 
   useEffect(() => {
     fetchOneMovie();
-  }, []);
+  }, [language]);
+
   return (
     <div className="container-movie">
       <MobileMovie />

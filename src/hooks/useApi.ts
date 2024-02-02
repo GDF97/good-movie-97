@@ -1,7 +1,11 @@
+import { useContext } from "react";
+import { LanguageContext } from "../contexts/LanguageContext";
+
 export const useApi = () => {
   const baseUrl = import.meta.env.VITE_API;
   const searchUrl = import.meta.env.VITE_SEARCH;
   const tokken = import.meta.env.VITE_TOKKEN;
+  const { language } = useContext(LanguageContext);
 
   const options = {
     method: "GET",
@@ -12,7 +16,7 @@ export const useApi = () => {
   };
 
   return {
-    fetchTopRatedMovies: async (language: string) => {
+    fetchTopRatedMovies: async () => {
       const response = await fetch(
         `${baseUrl}top_rated?language=${language}`,
         options
@@ -20,7 +24,7 @@ export const useApi = () => {
       const data = await response.json();
       return data;
     },
-    fetchOneMovie: async (id: number, language: string) => {
+    fetchOneMovie: async (id: number) => {
       const response = await fetch(
         `${baseUrl}${id}?language=${language}`,
         options
@@ -28,7 +32,7 @@ export const useApi = () => {
       const data = response.json();
       return data;
     },
-    fetchSearchedMovie: async (movie: string, language: string) => {
+    fetchSearchedMovie: async (movie: string) => {
       const response = await fetch(
         `${searchUrl}?query=${movie}&language=${language}`,
         options

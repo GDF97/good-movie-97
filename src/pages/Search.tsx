@@ -2,8 +2,9 @@ import { useSearchParams } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import "../scss/pages/Home.scss";
 import { Movie } from "../types/Movie";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CardMovie from "../components/CardMovie";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 const Search = () => {
   const api = useApi();
@@ -11,12 +12,13 @@ const Search = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
   const queryAsString = query ? String(query) : "";
+  const { language } = useContext(LanguageContext);
 
   const [movies, setMovies] = useState<Array<Movie>>([]);
 
   const fetchSearchedMovie = async (movieName: string) => {
     try {
-      const { results } = await api.fetchSearchedMovie(movieName, "en-US");
+      const { results } = await api.fetchSearchedMovie(movieName);
       const newMovies = results.map((element: Movie) => ({
         id: element.id,
         title: element.title,
@@ -30,7 +32,7 @@ const Search = () => {
 
   useEffect(() => {
     fetchSearchedMovie(queryAsString);
-  }, [queryAsString]);
+  }, [queryAsString, language]);
 
   return (
     <div className="container">

@@ -2,6 +2,7 @@ import { FormEvent, useState, KeyboardEvent } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
 import "../scss/components/Navbar.scss";
 import { Link, useNavigate } from "react-router-dom";
+import ButtonsChangeLanguage from "./ButtonsChangeLanguage";
 
 const Navbar = () => {
   const [movieName, setMovieName] = useState("");
@@ -24,11 +25,14 @@ const Navbar = () => {
   };
   return (
     <header>
-      <Link to="/" className="logo">
-        <p>Good</p>
-        <p>Movie</p>
-        <p>97</p>
-      </Link>
+      <div>
+        <Link to="/" className="logo">
+          <p>Good</p>
+          <p>Movie</p>
+          <p>97</p>
+        </Link>
+        <ButtonsChangeLanguage />
+      </div>
       <div>
         <input
           type="text"

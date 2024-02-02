@@ -1,0 +1,27 @@
+@import "../variables";
+
+.btnLanguageWrapper {
+  display: flex;
+  flex-direction: row;
+  padding-left: 1rem;
+  gap: 1rem;
+
+  button {
+    width: 50px;
+    padding: 0.25rem;
+    background-color: $primary-color;
+    border: 2px solid $highlight-color;
+    color: $font-color;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $highlight-color;
+      color: $primary-color;
+    }
+
+    &.active {
+      box-shadow: 0px 0px 6px 2px $font-color;
+      border-color: $font-color;
+    }
+  }
+}
