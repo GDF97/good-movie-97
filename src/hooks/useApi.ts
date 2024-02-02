@@ -12,18 +12,27 @@ export const useApi = () => {
   };
 
   return {
-    fetchTopRatedMovies: async () => {
-      const response = await fetch(`${baseUrl}top_rated`, options);
+    fetchTopRatedMovies: async (language: string) => {
+      const response = await fetch(
+        `${baseUrl}top_rated?language=${language}`,
+        options
+      );
       const data = await response.json();
       return data;
     },
-    fetchOneMovie: async (id: number) => {
-      const response = await fetch(`${baseUrl}${id}`, options);
+    fetchOneMovie: async (id: number, language: string) => {
+      const response = await fetch(
+        `${baseUrl}${id}?language=${language}`,
+        options
+      );
       const data = response.json();
       return data;
     },
-    fetchSearchedMovie: async (movie: string) => {
-      const response = await fetch(`${searchUrl}?query=${movie}`, options);
+    fetchSearchedMovie: async (movie: string, language: string) => {
+      const response = await fetch(
+        `${searchUrl}?query=${movie}&language=${language}`,
+        options
+      );
       const data = await response.json();
       return data;
     },

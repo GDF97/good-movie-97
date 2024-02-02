@@ -16,7 +16,7 @@ const Search = () => {
 
   const fetchSearchedMovie = async (movieName: string) => {
     try {
-      const { results } = await api.fetchSearchedMovie(movieName);
+      const { results } = await api.fetchSearchedMovie(movieName, "en-US");
       const newMovies = results.map((element: Movie) => ({
         id: element.id,
         title: element.title,

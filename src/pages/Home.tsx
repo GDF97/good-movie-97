@@ -10,7 +10,7 @@ const Home = () => {
 
   const fetchMovies = async () => {
     try {
-      const { results } = await api.fetchTopRatedMovies();
+      const { results } = await api.fetchTopRatedMovies("en-US");
       const newMovies = results.map((element: Movie) => ({
         id: element.id,
         title: element.title,

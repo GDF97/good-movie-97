@@ -75,7 +75,7 @@ const MoviePoster = () => {
 
   const fetchOneMovie = async () => {
     const { id, title, poster_path, overview, budget, revenue, runtime } =
-      await api.fetchOneMovie(parserId);
+      await api.fetchOneMovie(parserId, "en-US");
 
     const moviePosterObj: Movie = {
       id,
@@ -96,7 +96,7 @@ const MoviePoster = () => {
   return (
     <div className="container-movie">
       <MobileMovie />
-      <DesktopMovie {...moviePoster!} />
+      {moviePoster && <DesktopMovie {...moviePoster} />}
     </div>
   );
 };
