@@ -1,0 +1,33 @@
+@import "../mixins";
+@import "../variables";
+
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 4rem;
+  @include flex(column, center, start);
+  gap: 3rem;
+
+  .container-title {
+    font-size: 3rem;
+    color: $font-color;
+  }
+
+  .movie-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    justify-items: center;
+
+    .erro {
+      font-size: 16px;
+      color: white;
+    }
+  }
+}
+
+strong {
+  color: $highlight-color;
+  text-transform: capitalize;
+}

@@ -1,0 +1,58 @@
+@import "../mixins";
+@import "../variables";
+
+header {
+  width: 100%;
+  min-height: 100px;
+  padding: 1rem 6rem;
+  background-color: $secondary-color;
+  @include flex(row, center, space-between);
+  border-bottom: 2px solid $highlight-color;
+
+  .logo {
+    text-decoration: none;
+    color: white;
+    font-size: 32px;
+    display: flex;
+
+    p {
+      &:where(:first-child, :nth-child(2)) {
+        &::first-letter {
+          color: $highlight-color;
+        }
+      }
+      &:last-child {
+        color: $highlight-color;
+      }
+    }
+  }
+
+  div {
+    @include flex(row, center, inherit);
+    gap: 1rem;
+
+    input,
+    .btn {
+      border: none;
+      height: 35px;
+    }
+
+    input {
+      width: 300px;
+      padding: 0 0.5rem;
+      outline: none;
+      border: 2px solid $highlight-color;
+      background-color: $primary-color;
+      color: $font-color;
+    }
+
+    .btn {
+      width: 35px;
+      background-color: $highlight-color;
+      @include flex(row, center, center);
+      font-size: 20px;
+      cursor: pointer;
+      color: black;
+    }
+  }
+}
