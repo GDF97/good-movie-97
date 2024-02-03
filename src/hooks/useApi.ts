@@ -1,11 +1,13 @@
 import { useContext } from "react";
-import { LanguageContext } from "../contexts/LanguageContext";
+import { LanguageContext } from "../contexts/Language/LanguageContext";
+import { PageContext } from "../contexts/Page/PageContext";
 
 export const useApi = () => {
   const baseUrl = import.meta.env.VITE_API;
   const searchUrl = import.meta.env.VITE_SEARCH;
   const tokken = import.meta.env.VITE_TOKKEN;
   const { language } = useContext(LanguageContext);
+  const { page } = useContext(PageContext);
 
   const options = {
     method: "GET",
@@ -18,7 +20,7 @@ export const useApi = () => {
   return {
     fetchTopRatedMovies: async () => {
       const response = await fetch(
-        `${baseUrl}top_rated?language=${language}`,
+        `${baseUrl}top_rated?language=${language}&page=${page}`,
         options
       );
       const data = await response.json();
@@ -34,7 +36,7 @@ export const useApi = () => {
     },
     fetchSearchedMovie: async (movie: string) => {
       const response = await fetch(
-        `${searchUrl}?query=${movie}&language=${language}`,
+        `${searchUrl}?query=${movie}&language=${language}&page=${page}`,
         options
       );
       const data = await response.json();

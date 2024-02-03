@@ -4,7 +4,9 @@ import "../scss/pages/Home.scss";
 import { Movie } from "../types/Movie";
 import { useContext, useEffect, useState } from "react";
 import CardMovie from "../components/CardMovie";
-import { LanguageContext } from "../contexts/LanguageContext";
+import { LanguageContext } from "../contexts/Language/LanguageContext";
+import PaginationButtons from "../components/PaginationButton/PaginationButtons";
+import { PageContext } from "../contexts/Page/PageContext";
 
 const Search = () => {
   const api = useApi();
@@ -13,18 +15,20 @@ const Search = () => {
   const query = searchParams.get("query");
   const queryAsString = query ? String(query) : "";
   const { language } = useContext(LanguageContext);
+  const { page, setNumberOfPages } = useContext(PageContext);
 
   const [movies, setMovies] = useState<Array<Movie>>([]);
 
   const fetchSearchedMovie = async (movieName: string) => {
     try {
-      const { results } = await api.fetchSearchedMovie(movieName);
+      const { results, total_pages } = await api.fetchSearchedMovie(movieName);
       const newMovies = results.map((element: Movie) => ({
         id: element.id,
         title: element.title,
         poster_path: element.poster_path,
       }));
       setMovies(newMovies);
+      setNumberOfPages(total_pages);
     } catch (error) {
       console.error(error);
     }
@@ -32,7 +36,7 @@ const Search = () => {
 
   useEffect(() => {
     fetchSearchedMovie(queryAsString);
-  }, [queryAsString, language]);
+  }, [queryAsString, language, page]);
 
   return (
     <div className="container">
@@ -50,6 +54,7 @@ const Search = () => {
           </>
         )}
       </div>
+      <PaginationButtons />
     </div>
   );
 };

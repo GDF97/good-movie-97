@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { LanguageContext } from "../contexts/LanguageContext";
+import { LanguageContext } from "../contexts/Language/LanguageContext";
 import "../scss/components/btnLanguage.scss";
 
 const ButtonsChangeLanguage = () => {

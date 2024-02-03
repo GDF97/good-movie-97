@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { Movie } from "../types/Movie";
 
 import "../scss/pages/Movie.scss";
-import { LanguageContext } from "../contexts/LanguageContext";
+import { LanguageContext } from "../contexts/Language/LanguageContext";
 
 const formatCurrency = (number: number) => {
   return number.toLocaleString("en-US", {
@@ -75,9 +75,9 @@ const MoviePoster = () => {
   const [moviePoster, setMoviePoster] = useState<Movie | null>(null);
   const { language } = useContext(LanguageContext);
 
-  const fetchOneMovie = async () => {
+  const fetchOneMovie = async (movie_id: number) => {
     const { id, title, poster_path, overview, budget, revenue, runtime } =
-      await api.fetchOneMovie(parserId);
+      await api.fetchOneMovie(movie_id);
 
     const moviePosterObj: Movie = {
       id,
@@ -93,7 +93,7 @@ const MoviePoster = () => {
   };
 
   useEffect(() => {
-    fetchOneMovie();
+    fetchOneMovie(parserId);
   }, [language]);
 
   return (
