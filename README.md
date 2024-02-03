@@ -18,7 +18,7 @@
   - [ ] Filtrar pelos filmes + recentes
   - [ ] Filtrar por categorias como +18/+14/L
   - [x] Escolher a linguagem (PT-BR/ING-EUA)
-  - [ ] Adicionar paginação (1,2,3,4...)
+  - [x] Adicionar paginação (1,2,3,4...)
 
 ##
 
