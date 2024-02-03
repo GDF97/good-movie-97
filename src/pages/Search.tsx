@@ -15,7 +15,8 @@ const Search = () => {
   const query = searchParams.get("query");
   const queryAsString = query ? String(query) : "";
   const { language } = useContext(LanguageContext);
-  const { page, setNumberOfPages } = useContext(PageContext);
+  const { page, setNumberOfPages, getNumberOfPages, changePage } =
+    useContext(PageContext);
 
   const [movies, setMovies] = useState<Array<Movie>>([]);
 
@@ -36,6 +37,10 @@ const Search = () => {
 
   useEffect(() => {
     fetchSearchedMovie(queryAsString);
+    if (page >= getNumberOfPages.length) {
+      console.log(getNumberOfPages.length);
+      changePage(getNumberOfPages.length);
+    }
   }, [queryAsString, language, page]);
 
   return (
@@ -43,6 +48,7 @@ const Search = () => {
       <h1 className="container-title">
         Mostrando resultados para: <strong> {queryAsString} </strong>
       </h1>
+      <PaginationButtons />
       <div className="movie-grid">
         {movies.length === 0 ? (
           <p className="erro">Não há resultados para {queryAsString}</p>

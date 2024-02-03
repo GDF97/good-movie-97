@@ -1,14 +1,24 @@
 import { useContext } from "react";
 import { PageContext } from "../../contexts/Page/PageContext";
+import "./Button.scss";
 
-const Button = ({ page }: { page: number }) => {
-  const { changePage } = useContext(PageContext);
+const Button = ({ pageNumber }: { pageNumber: number }) => {
+  const { page, changePage } = useContext(PageContext);
+
   const handleClick = (page: number) => {
     changePage(page);
+    window.scrollTo({
+      top: 0,
+    });
   };
+
   return (
-    <button value={page} onClick={() => handleClick(page)}>
-      {page}
+    <button
+      className={pageNumber === page ? "active" : ""}
+      value={pageNumber}
+      onClick={() => handleClick(pageNumber)}
+    >
+      {pageNumber}
     </button>
   );
 };

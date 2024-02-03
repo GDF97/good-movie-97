@@ -1,16 +1,17 @@
 import { useContext } from "react";
 import Button from "./Button";
 import { PageContext } from "../../contexts/Page/PageContext";
+import "../../scss/components/PaginationButtons.scss";
 
 const PaginationButtons = () => {
   const { getNumberOfPages } = useContext(PageContext);
 
   return (
-    <div>
+    <div className="pgButtonsWrapper">
       {getNumberOfPages.length > 0 && (
         <>
           {getNumberOfPages.map((number) => (
-            <Button key={number} page={number} />
+            <Button key={number} pageNumber={number} />
           ))}
         </>
       )}

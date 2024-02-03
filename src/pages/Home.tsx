@@ -9,8 +9,10 @@ import PaginationButtons from "../components/PaginationButton/PaginationButtons"
 
 const Home = () => {
   const api = useApi();
+
   const { language } = useContext(LanguageContext);
   const { page, setNumberOfPages } = useContext(PageContext);
+
   const [movies, setMovies] = useState<Array<Movie>>([]);
 
   const fetchMovies = async () => {
@@ -35,7 +37,7 @@ const Home = () => {
   return (
     <div className="container">
       <h1 className="container-title">Melhores Filmes</h1>
-      <p>{language}</p>
+      <PaginationButtons />
       <div className="movie-grid">
         {movies.length === 0 ? (
           <p>erro</p>
