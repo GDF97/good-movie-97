@@ -35,6 +35,7 @@ const Home = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetchMovies();
   }, [language, page]);
 
