@@ -5,7 +5,7 @@ const PaginationButtons = () => {
   return (
     <>
       <PaginationDesktop />
-      {/* <PaginationMobile /> */}
+      <PaginationMobile />
     </>
   );
 };

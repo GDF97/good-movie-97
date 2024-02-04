@@ -1,11 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import ButtonsChangeLanguage from "../ButtonsChangeLanguage";
-import { KeyboardEvent, useState } from "react";
+import { KeyboardEvent, useContext, useState } from "react";
 import { FaAlignJustify } from "react-icons/fa";
 
 import "../../scss/components/Navbar.scss";
+import { PageContext } from "../../contexts/Page/PageContext";
 
 const NavbarMobile = () => {
+  const { changePage } = useContext(PageContext);
+
   const [movieName, setMovieName] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -26,7 +29,7 @@ const NavbarMobile = () => {
 
   return (
     <header className="header-mobile">
-      <Link to="/" className="logo">
+      <Link to="/" className="logo" onClick={() => changePage(1)}>
         <p>Good</p>
         <p>Movie</p>
         <p>97</p>

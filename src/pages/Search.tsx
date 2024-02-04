@@ -17,10 +17,11 @@ const Search = () => {
   const queryAsString = query ? String(query) : "";
 
   const { language } = useContext(LanguageContext);
-  const { page, setNumberOfPages, changePage } = useContext(PageContext);
+  const { page, setNumberOfPages, changePage, getNumberOfPages } =
+    useContext(PageContext);
 
   const [movies, setMovies] = useState<Array<Movie>>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchSearchedMovie = async (movieName: string) => {
     try {
@@ -34,17 +35,15 @@ const Search = () => {
       setNumberOfPages(total_pages);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchSearchedMovie(queryAsString);
+    console.log(getNumberOfPages.length);
   }, [queryAsString, language, page]);
-
-  useEffect(() => {
-    console.log(queryAsString);
-    changePage(1);
-  }, [queryAsString]);
 
   return (
     <div className="container">
@@ -58,7 +57,13 @@ const Search = () => {
           <PaginationButtons />
           <div className="movie-grid">
             {movies.length === 0 ? (
-              <p className="erro">Não há resultados para {queryAsString}</p>
+              <>
+                {getNumberOfPages.length === 1 ? (
+                  changePage(1)
+                ) : (
+                  <p>Não há resultados para {queryAsString}</p>
+                )}
+              </>
             ) : (
               <>
                 {movies.map((movie, index) => (

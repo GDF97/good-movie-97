@@ -18,6 +18,7 @@ export const PageProvider = ({ children }: { children: JSX.Element }) => {
       i++;
     }
     setNumeroDePaginas(arr);
+    console.log(arr);
   };
 
   const getNumberOfPages: number[] = numeroDePaginas;

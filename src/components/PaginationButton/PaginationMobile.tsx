@@ -21,21 +21,25 @@ const PaginationMobile = () => {
 
   return (
     <div className="pgButtonMobileWrapper">
-      <button
-        className={page === 1 ? "pgBtn disabled" : "pgBtn"}
-        onClick={() => paginaAnterior(page)}
-      >
-        {"<"}
-      </button>
-      <p>{page}</p>
-      <button
-        className={
-          page === getNumberOfPages.length ? "pgBtn disabled" : "pgBtn"
-        }
-        onClick={() => paginaSeguinte(page)}
-      >
-        {">"}
-      </button>
+      {getNumberOfPages.length >= 0 && (
+        <>
+          <button
+            className={page === 1 ? "pgBtn disabled" : "pgBtn"}
+            onClick={() => paginaAnterior(page)}
+          >
+            {"<"}
+          </button>
+          <p>{page}</p>
+          <button
+            className={
+              page === getNumberOfPages.length ? "pgBtn disabled" : "pgBtn"
+            }
+            onClick={() => paginaSeguinte(page)}
+          >
+            {">"}
+          </button>
+        </>
+      )}
     </div>
   );
 };
