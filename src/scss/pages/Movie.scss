@@ -8,6 +8,7 @@
 .container-movie {
   @include flex(row, center, center);
   padding-top: 3rem;
+  padding-bottom: 3rem;
 
   .desktop-poster {
     width: 1200px;
@@ -75,7 +76,51 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .mobile-poster {
-    display: flex;
+  .container-movie {
+    .desktop-poster {
+      display: none;
+    }
+
+    .mobile-poster {
+      width: 375px;
+      @include flex(column, start, start);
+      gap: 2rem;
+      color: $font-color;
+
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+
+      h2 {
+        width: 100%;
+        text-align: center;
+      }
+
+      div {
+        p {
+          &:nth-child(1) {
+            padding-bottom: 0.5rem;
+          }
+        }
+
+        &:last-child {
+          p {
+            text-align: justify;
+            &:nth-child(1) {
+              font-style: italic;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .container-movie {
+    .mobile-poster {
+      width: 300px;
+    }
   }
 }

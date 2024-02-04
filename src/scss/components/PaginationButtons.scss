@@ -1,8 +1,30 @@
+@import "../variables";
+
+.pgButtonMobileWrapper,
 .pgButtonsWrapper {
   width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
+}
+
+.pgButtonMobileWrapper {
+  display: none;
+}
+
+@media screen and (max-width: 750px) {
+  .pgButtonMobileWrapper {
+    display: flex;
+    gap: 2rem;
+
+    p {
+      color: $highlight-color;
+    }
+  }
+  .pgButtonsWrapper {
+    display: none;
+  }
 }

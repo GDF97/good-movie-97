@@ -13,10 +13,35 @@ const formatCurrency = (number: number) => {
   });
 };
 
-const MobileMovie = () => {
+const MobileMovie = ({
+  id,
+  title,
+  poster_path,
+  overview,
+  budget,
+  revenue,
+  runtime,
+}: Movie) => {
   return (
     <div className="mobile-poster">
-      <h1>teste</h1>
+      <img src={`${import.meta.env.VITE_IMG}${poster_path}`} alt="" />
+      <h2>{title}</h2>
+      <div>
+        <p>Orçamento:</p>
+        <p>{budget ? formatCurrency(budget) : 0}</p>
+      </div>
+      <div>
+        <p>Receita:</p>
+        <p>{revenue ? formatCurrency(revenue) : 0}</p>
+      </div>
+      <div>
+        <p>Duração</p>
+        <p>{runtime} minutes</p>
+      </div>
+      <div>
+        <p>Descrição</p>
+        <p>{overview}</p>
+      </div>
     </div>
   );
 };
@@ -98,8 +123,8 @@ const MoviePoster = () => {
 
   return (
     <div className="container-movie">
-      <MobileMovie />
       {moviePoster && <DesktopMovie {...moviePoster} />}
+      {moviePoster && <MobileMovie {...moviePoster} />}
     </div>
   );
 };

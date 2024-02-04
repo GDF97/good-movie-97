@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import MoviePoster from "./pages/Movie";
 import Search from "./pages/Search";
+import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {
   return (

@@ -14,7 +14,7 @@ const Button = ({ pageNumber }: { pageNumber: number }) => {
 
   return (
     <button
-      className={pageNumber === page ? "active" : ""}
+      className={pageNumber === page ? "pgBtn active" : "pgBtn"}
       value={pageNumber}
       onClick={() => handleClick(pageNumber)}
     >

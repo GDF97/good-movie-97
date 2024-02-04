@@ -7,6 +7,7 @@ import CardMovie from "../components/CardMovie";
 import { LanguageContext } from "../contexts/Language/LanguageContext";
 import PaginationButtons from "../components/PaginationButton/PaginationButtons";
 import { PageContext } from "../contexts/Page/PageContext";
+import Loader from "../components/Loader";
 
 const Search = () => {
   const api = useApi();
@@ -14,11 +15,12 @@ const Search = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
   const queryAsString = query ? String(query) : "";
+
   const { language } = useContext(LanguageContext);
-  const { page, setNumberOfPages, getNumberOfPages, changePage } =
-    useContext(PageContext);
+  const { page, setNumberOfPages, changePage } = useContext(PageContext);
 
   const [movies, setMovies] = useState<Array<Movie>>([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchSearchedMovie = async (movieName: string) => {
     try {
@@ -37,30 +39,37 @@ const Search = () => {
 
   useEffect(() => {
     fetchSearchedMovie(queryAsString);
-    if (page >= getNumberOfPages.length) {
-      console.log(getNumberOfPages.length);
-      changePage(getNumberOfPages.length);
-    }
   }, [queryAsString, language, page]);
+
+  useEffect(() => {
+    console.log(queryAsString);
+    changePage(1);
+  }, [queryAsString]);
 
   return (
     <div className="container">
       <h1 className="container-title">
         Mostrando resultados para: <strong> {queryAsString} </strong>
       </h1>
-      <PaginationButtons />
-      <div className="movie-grid">
-        {movies.length === 0 ? (
-          <p className="erro">Não há resultados para {queryAsString}</p>
-        ) : (
-          <>
-            {movies.map((movie, index) => (
-              <CardMovie key={index} {...movie} />
-            ))}
-          </>
-        )}
-      </div>
-      <PaginationButtons />
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <PaginationButtons />
+          <div className="movie-grid">
+            {movies.length === 0 ? (
+              <p className="erro">Não há resultados para {queryAsString}</p>
+            ) : (
+              <>
+                {movies.map((movie, index) => (
+                  <CardMovie key={index} {...movie} />
+                ))}
+              </>
+            )}
+          </div>
+          <PaginationButtons />
+        </>
+      )}
     </div>
   );
 };

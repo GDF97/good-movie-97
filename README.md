@@ -13,16 +13,14 @@
 
 ### Todo
 
-- [ ] Deixar Responsivo
+- [x] Deixar Responsivo
 - Adionar novas funcionalidades
-  - [ ] Filtrar pelos filmes + recentes
-  - [ ] Filtrar por categorias como +18/+14/L
   - [x] Escolher a linguagem (PT-BR/ING-EUA)
   - [x] Adicionar paginação (1,2,3,4...)
-  - [ ] Adicionar um loader
+  - [x] Adicionar um loader
 
 ##
 
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
+![alt text](./public/image.png)
+![alt text](./public/image-1.png)
+![alt text](./public/image-2.png)

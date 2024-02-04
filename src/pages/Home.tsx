@@ -6,6 +6,7 @@ import CardMovie from "../components/CardMovie";
 import { LanguageContext } from "../contexts/Language/LanguageContext";
 import { PageContext } from "../contexts/Page/PageContext";
 import PaginationButtons from "../components/PaginationButton/PaginationButtons";
+import Loader from "../components/Loader";
 
 const Home = () => {
   const api = useApi();
@@ -14,6 +15,7 @@ const Home = () => {
   const { page, setNumberOfPages } = useContext(PageContext);
 
   const [movies, setMovies] = useState<Array<Movie>>([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchMovies = async () => {
     try {
@@ -27,6 +29,8 @@ const Home = () => {
       setNumberOfPages(total_pages);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -37,19 +41,25 @@ const Home = () => {
   return (
     <div className="container">
       <h1 className="container-title">Melhores Filmes</h1>
-      <PaginationButtons />
-      <div className="movie-grid">
-        {movies.length === 0 ? (
-          <p>erro</p>
-        ) : (
-          <>
-            {movies.map((movie, index) => (
-              <CardMovie key={index} {...movie} />
-            ))}
-          </>
-        )}
-      </div>
-      <PaginationButtons />
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <PaginationButtons />
+          <div className="movie-grid">
+            {movies.length === 0 ? (
+              <p>erro</p>
+            ) : (
+              <>
+                {movies.map((movie, index) => (
+                  <CardMovie key={index} {...movie} />
+                ))}
+              </>
+            )}
+          </div>
+          <PaginationButtons />
+        </>
+      )}
     </div>
   );
 };
