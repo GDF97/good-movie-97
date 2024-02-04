@@ -41,6 +41,7 @@ const Search = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetchSearchedMovie(queryAsString);
     console.log(getNumberOfPages.length);
   }, [queryAsString, language, page]);
